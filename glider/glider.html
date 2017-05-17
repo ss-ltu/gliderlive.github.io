@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GRitS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+<style>
+    body {font-family:'Roboto Condensed',sans-serif; margin:0; padding:0;}
+    @media (min-width:1024px) {body {font-size:large;}}
+
+    .container {margin:0 auto; max-width:800px;}
+    header {overflow:hidden; padding-top:20px; position:relative;}
+    header img {width:100%;}
+    .header-text {box-sizing:border-box; display:inline-block; margin:0 40px 0;}
+    h1 {background-color:#e2231b; color:#fff; left:-12px; margin:-20px 0 0; padding:30px; position:absolute; text-align:center; top:-10px; transform:rotateZ(-9deg);}
+    .tag {margin:0; padding:20px 20px 20px 50%; text-align:right;}
+    .header-text p {font-family:'Roboto',sans-serif;}
+    .tip {float:left; width:50%;}
+    .cta {text-align:right;}
+    .cta a {background-color:#e2231b; border-radius:100%; box-shadow:0px 4px 10px rgba(0,0,0,0.4); color:#fff; display:inline-block; font:20px/1 'Roboto Condensed',sans-serif; text-decoration:none; padding:28px 20px;}
+    @media (min-width:1024px) {
+        header {padding-top:40px;}
+        .tag {font-size:x-large; padding-bottom:0;}
+        .tip {float:right; padding-right:20px; text-align:right; width:40%;}
+        .cta {display:none;}
+    }
+
+    h1, h2 {margin-top:0;}
+    .wrapper {padding:20px 40px;}
+
+    @media (min-width:1024px) {
+        header img {float:left; width:50%;}
+        .header-text {margin:0; width:100%;}
+    }
+
+    ol {box-shadow:4px 0 0 #ccc inset; list-style-type:none; margin:0; padding:0; position:relative;}
+    ol.night {display:none;}
+    .stop {padding:20px; position:relative; transition:transform 0.5s ease-in-out;}
+    .stop:before {background-color:#333; border-radius:100%; color:#fff; display:block; height:28px; left:-12px; line-height:26px; position:absolute; text-align:center; width:28px;}
+    .stop:nth-child(1):before {content:"1";}
+    .stop:nth-child(2):before {content:"2";}
+    .stop:nth-child(3):before {content:"3";}
+    .stop:nth-child(4):before {content:"4";}
+    .stop:nth-child(5):before {content:"5";}
+    .stop:nth-child(6):before {content:"6";}
+    .stop:nth-child(7):before {content:"7";}
+    .stop:nth-child(8):before {content:"8";}
+    .stop:nth-child(9):before {content:"9";}
+    .stop:nth-child(10):before {content:"10";}
+
+    .stop a {padding:11px 14px;}
+    .stop img {position:absolute; right:48px; transform:translateY(2px); width:20px;}
+    .time {position:absolute; right:0;}
+
+    .departed:after {animation:tilt 1s 0s infinite linear; background:url(bus.svg) no-repeat 0 0; background-size:28px; content:""; display:block; height:28px; left:-12px; position:absolute; top:51px; transform-origin:bottom center; width:28px}
+    .embarking {padding-left:28px;}
+    .embarking:before {background:url(bus.svg) no-repeat 0 0; background-size:48px; content:''!important; height:48px; left:-23px; top:10px; width:48px;}
+    .embarking:after {animation:walkanim 1.5s infinite steps(7); background:url(walk-sequence.svg) no-repeat 0 0; background-size:8em; content:""; display:block; height:40px; left:-44px; position:absolute; top:24px; width:2em;}
+    @media (min-width:768px) {
+        .stop {border-bottom:1px dotted #ccc;}
+    }
+    @media (min-width:1024px) {
+        .embarking:after {left:-48px;}
+    }
+
+@keyframes spin {
+  0% {transform: rotateZ(0deg);}
+  100% {transform: rotateZ(360deg);}
+}
+@keyframes tilt {
+  0% {transform:rotateZ(-5deg);}
+  50% {transform:rotateZ(5deg);}
+  100% {transform:rotateZ(-5deg);}
+}
+@keyframes walkanim {
+  to { background-position: 100% 0; }
+}
+</style>
+
+</head>
+<body>
+
+<!--
+Status:
+    id of stop number
+    time departed = null = taking passengers
+    time departed = timestamp = enroute
+-->
+<div class="container">
+<header>
+<h1>GRiTS</h1>
+<p class="tag">Glider Real information Time Service</p>
+<div class="header-text">
+    <img src="Artboard%201-80.jpg" alt="" />
+    <p class="tip">Free bus loop around the Melbourne campus.</p>
+    <p class="cta"><a href="#content">Start</a></p>
+</div>
+</header>
+<div id="content" class="wrapper">
+    <h2><span id="service"></span> <span id="time"></span></h2>
+    <ol class="day">
+        <li class="stop">Plenty Road <a href="geo:-37.7177889,145.0451702"><img src="map.svg" alt="Plenty Road geolocation" /></a> <span class="time">12 Min</span></li>
+        <li class="stop">Thomas Cherry Building <a href="geo:-37.7206829,145.0459336"><img src="map.svg" alt="Thomas Cherry Building geolocation" /></a> <span class="time">14 Min</span></li>
+        <li class="stop">Union Building <a href="geo:-37.7217681,145.0479534"><img src="map.svg" alt="Union Building geolocation" /></a> <span class="time">17 Min</span></li>
+        <li class="stop departed">Gatehouse <a href="geo:-37.7231711,145.0459726"><img src="map.svg" alt="Gatehouse geolocation" /></a> <span class="time">19 Min</span></li>
+        <li class="stop">AgriBio Building <a href="geo:-37.7248148,145.0524709"><img src="map.svg" alt="AgriBio Building geolocation" /></a> <span class="time">1 Min</span></li>
+        <li class="stop">Terraces <a href="geo:-37.7220707,145.0555998"><img src="map.svg" alt="Terraces geolocation" /></a> <span class="time">4 Min</span></li>
+        <li class="stop">Uni Lodge <a href="geo:-37.7214763,145.059298"><img src="map.svg" alt="Uni Lodge geolocation" /></a> <span class="time">6 Min</span></li>
+        <li class="stop">Gresswell <a href="geo:-37.7161272,145.0606301"><img src="map.svg" alt="Gresswell geolocation" /></a> <span class="time">8 Min</span></li>
+        <li class="stop">Graduate House <a href="geo:-37.7149475,145.0500837"><img src="map.svg" alt="Graduate House geolocation" /></a> <span class="time">9 Min</span></li>
+        <li class="stop">Polaris <a href="geo:-37.7140606,145.0489196"><img src="map.svg" alt="Polaris geolocation" /></a> <span class="time">10 Min</span></li>
+    </ol>
+    <!--ol class="night">
+        <li class="stop">Plenty Road <a href="geo:-37.7177889,145.0451702"><img src="map.svg" alt="Plenty Road geolocation" /></a> <span class="time">12 Min</span></li>
+        <li class="stop">Thomas Cherry Building <a href="geo:-37.7206829,145.0459336"><img src="map.svg" alt="Thomas Cherry Building geolocation" /></a> <span class="time">14 Min</span></li>
+        <li class="stop">Union Building <a href="geo:-37.7217681,145.0479534"><img src="map.svg" alt="Union Building geolocation" /></a> <span class="time">17 Min</span></li>
+        <li class="stop">Gatehouse <a href="geo:-37.7231711,145.0459726"><img src="map.svg" alt="Gatehouse geolocation" /></a> <span class="time">19 Min</span></li>
+        <li class="stop">Chisholm College <a href="geo:-37.7243165,145.0504253"><img src="map.svg" alt="Chisholm College geolocation" /></a> <span class="time">10 Min</span></li>
+        <li class="stop">Glenn/Menzies Colleges <a href="geo:-37.7222931,145.0527085"><img src="map.svg" alt="Glenn/Menzies Colleges geolocation" /></a> <span class="time">10 Min</span></li>
+        <li class="stop">Barnes Way <a href="geo:-37.7278585,145.0506272"><img src="map.svg" alt="Polaris geolocation" /></a> <span class="time">10 Min</span></li>
+        <li class="stop">The University Lodge <a href="geo:-37.7241395,145.061549"><img src="map.svg" alt="Polaris geolocation" /></a> <span class="time">10 Min</span></li>
+        <li class="stop">Graduate House <a href="geo:-37.7149475,145.0500837"><img src="map.svg" alt="Graduate House geolocation" /></a> <span class="time">9 Min</span></li>
+        <li class="stop">Polaris <a href="geo:-37.7140606,145.0489196"><img src="map.svg" alt="Polaris geolocation" /></a> <span class="time">10 Min</span></li>
+    </ol-->
+    <p>No service during summer break (November - February) or winter break (June – July).</p>
+</div>
+</div>
+<script>
+function sort(){
+    var stops = document.querySelectorAll('.stop');
+    var active = document.querySelector('.departed,.embarking');
+    if (active === null) {
+        active = document.querySelector('.stop');
+    }
+    var n = index(active);
+    //var pre = [];
+    //var aft = [];
+
+    for (i = 0; i < stops.length; ++i) {
+        if (i < n) {
+            //pre.push(stops[i]);
+            moveAft(stops[i],active.offsetHeight*(stops.length-n));
+        }
+        if (stops[i] === active && active.nextElementSibling !== null && active.nextElementSibling !== null) {
+            var activeI = i;
+            //pre.splice(i,1);
+            //pre.splice(i+1,1);
+            active.style.transform = 'translateY(-'+stops[i].offsetTop+'px)';
+            active.nextElementSibling.style.transform = 'translateY(-'+stops[i].offsetTop+'px)';
+        }
+        if (i > n+1) {
+            //aft.push(stops[i]);
+            movePre(stops[i],active.offsetTop);
+        }
+        if (active === stops[i].parentNode.lastElementChild) {
+            moveAft(active,'-'+active.offsetHeight*(stops.length-1));
+        }
+    }
+}
+sort();
+
+function clear(){
+    var stops = document.querySelectorAll('.stop');
+    for (i = 0; i < stops.length; ++i) {
+        stops[i].removeAttribute('style');
+    }
+}
+
+function index(el) {
+    var children = el.parentNode.children,
+        i = 0;
+    for (; i < children.length; i++) {
+        if (children[i] == el) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function movePre(ele,x) {
+    ele.style.transform = 'translateY(-'+x+'px)';
+}
+function moveAft(ele,x) {
+    ele.style.transform = 'translateY('+x+'px)';
+}
+/*
+document.body.addEventListener('click', function(e){
+    var stopped = document.querySelector('.departed');
+    if (stopped !== null) {
+        if (stopped.nextElementSibling === null) {
+            var stopped = document.querySelector('.stop');
+            stopped.parentElement.lastElementChild.classList.remove('departed');
+            stopped.parentElement.firstElementChild.classList.add('embarking');
+        }
+        if (stopped !== stopped.parentElement.firstElementChild) {
+            stopped.nextElementSibling.classList.add('embarking');
+            stopped.nextElementSibling.lastElementChild.textContent = 'Now';
+            stopped.classList.remove('departed');
+        }
+        if (stopped === stopped.parentElement.firstElementChild) {
+            stopped.classList.remove('embarking');
+            stopped.classList.add('departing');
+        }
+    } else {
+        var moving = document.querySelector('.embarking');
+        if (moving !== null) {
+            moving.classList.add('departed');
+            moving.classList.remove('embarking');
+        } else {
+
+        }
+    }
+    sort();
+});
+*/
+
+document.body.addEventListener('click', function(e){
+    var current = document.querySelector('.departed,.embarking');
+    // all but last
+    if (current.classList.contains('departed') === true && current !== current.parentNode.lastElementChild) {
+        current.classList.remove('departed');
+        current.nextElementSibling.classList.add('embarking');
+    }
+    // switch embarking to departed
+    if (current.classList.contains('embarking') === true && current !== current.parentNode.lastElementChild) {
+        current.classList.remove('embarking');
+        current.classList.add('departed');
+    }
+    // last item departed
+    if (current.classList.contains('departed') === true && current === current.parentNode.lastElementChild) {
+        current.classList.remove('departed');
+        current.parentNode.firstElementChild.classList.add('embarking');
+    }
+    // last item embarking
+    if (current.classList.contains('embarking') === true && current === current.parentNode.lastElementChild) {
+        current.classList.remove('embarking');
+        current.classList.add('departed');
+        //current.parentNode.firstElementChild.classList.add('departed');
+    }
+    sort();
+});
+
+(function () {
+    function checkTime(i) {
+        return (i < 10) ? "0" + i : i;
+    }
+
+    function startTime() {
+        var today = new Date(),
+            h = checkTime(today.getHours()),
+            m = checkTime(today.getMinutes()),
+            s = checkTime(today.getSeconds()),
+            p = '',
+            service = '';
+        if (h <= 11) {
+            p = 'AM';
+        } else {
+            p = 'PM';
+        }
+        if (h > 7 && m > 30) {
+            service = 'Day service';
+        } else if (h > 20 && m > 30) {
+            service = 'Night service, call <a href="tel:94792012">9479 2012</a>';
+        } else if (h > 21 || (h < 8 && m > 30)) {
+            service = 'No service';
+        }
+        document.getElementById('service').innerHTML = service;
+        document.getElementById('time').innerHTML = h + ":" + m + ":" + s + ' ' + p;
+        t = setTimeout(function () {
+            startTime()
+        }, 500);
+    }
+    startTime();
+})();
+</script>
+</body>
+</html>
