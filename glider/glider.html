@@ -135,23 +135,17 @@ function sort(){
         active = document.querySelector('.stop');
     }
     var n = index(active);
-    //var pre = [];
-    //var aft = [];
 
     for (i = 0; i < stops.length; ++i) {
         if (i < n) {
-            //pre.push(stops[i]);
             moveAft(stops[i],active.offsetHeight*(stops.length-n));
         }
         if (stops[i] === active && active.nextElementSibling !== null && active.nextElementSibling !== null) {
             var activeI = i;
-            //pre.splice(i,1);
-            //pre.splice(i+1,1);
             active.style.transform = 'translateY(-'+stops[i].offsetTop+'px)';
             active.nextElementSibling.style.transform = 'translateY(-'+stops[i].offsetTop+'px)';
         }
         if (i > n+1) {
-            //aft.push(stops[i]);
             movePre(stops[i],active.offsetTop);
         }
         if (active === stops[i].parentNode.lastElementChild) {
@@ -185,36 +179,6 @@ function movePre(ele,x) {
 function moveAft(ele,x) {
     ele.style.transform = 'translateY('+x+'px)';
 }
-/*
-document.body.addEventListener('click', function(e){
-    var stopped = document.querySelector('.departed');
-    if (stopped !== null) {
-        if (stopped.nextElementSibling === null) {
-            var stopped = document.querySelector('.stop');
-            stopped.parentElement.lastElementChild.classList.remove('departed');
-            stopped.parentElement.firstElementChild.classList.add('embarking');
-        }
-        if (stopped !== stopped.parentElement.firstElementChild) {
-            stopped.nextElementSibling.classList.add('embarking');
-            stopped.nextElementSibling.lastElementChild.textContent = 'Now';
-            stopped.classList.remove('departed');
-        }
-        if (stopped === stopped.parentElement.firstElementChild) {
-            stopped.classList.remove('embarking');
-            stopped.classList.add('departing');
-        }
-    } else {
-        var moving = document.querySelector('.embarking');
-        if (moving !== null) {
-            moving.classList.add('departed');
-            moving.classList.remove('embarking');
-        } else {
-
-        }
-    }
-    sort();
-});
-*/
 
 document.body.addEventListener('click', function(e){
     var current = document.querySelector('.departed,.embarking');
